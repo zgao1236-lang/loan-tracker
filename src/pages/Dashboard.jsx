@@ -10,6 +10,7 @@ import {
 import {
   calcMonthlyDue,
   calcMonthlyDueForMonth,
+  calcRemainingPrincipal,
   getUpcomingRepayments,
   getCurrentMonthRepayments,
 } from '../utils/loanCalc'
@@ -74,6 +75,21 @@ export default function Dashboard() {
     }
     return { paidTotal: paid, unpaidTotal: unpaid, borrowerTotals: bt }
   }, [loans, payments, currentMonth])
+
+  // ---- Weighted average rate ----
+  const weightedRate = useMemo(() => {
+    let totalWeight = 0
+    let weightedSum = 0
+    for (const loan of loans) {
+      const principal =
+        loan.type === 'equal_installment'
+          ? calcRemainingPrincipal(loan)
+          : loan.totalAmount
+      totalWeight += principal
+      weightedSum += principal * loan.annualRate
+    }
+    return totalWeight > 0 ? weightedSum / totalWeight : 0
+  }, [loans])
 
   // ---- Upcoming repayments ----
   const upcoming = useMemo(() => {
@@ -177,6 +193,11 @@ export default function Dashboard() {
             <span className="text-xs text-gray-400 mt-0.5">本月待还</span>
           </div>
         </div>
+        {loans.length > 0 && (
+          <p className="text-xs text-gray-400 mt-2">
+            加权平均利率 <span className="text-gray-600 font-medium">{weightedRate.toFixed(2)}%</span>
+          </p>
+        )}
 
         {/* Borrower cards */}
         <div className="flex gap-3 mt-4 w-full">
