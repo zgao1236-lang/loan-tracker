@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+html {
+  overflow-x: hidden;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', 'Helvetica Neue', sans-serif;
+  padding-top: env(safe-area-inset-top);
+  overflow-x: hidden;
+}
+
+main > * {
+  animation: fadeIn 0.25s ease-out;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
