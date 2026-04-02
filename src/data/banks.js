@@ -16,7 +16,7 @@ const banks = [
   { name: '平安银行', color: '#F07900', abbr: '平', group: '股份制银行' },
   { name: '华夏银行', color: '#E2231A', abbr: '华', group: '股份制银行' },
   // 城商行
-  { name: '南京银行', color: '#D4232A', abbr: '南', group: '城商行' },
+  { name: '南京银行', color: '#FF8C00', abbr: '南', group: '城商行' },
   // 互联网金融平台
   { name: '微众银行', color: '#07C160', abbr: '微', group: '互联网金融' },
   { name: '京东金融', color: '#E2231A', abbr: '京', group: '互联网金融' },
